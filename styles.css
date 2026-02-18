@@ -14,36 +14,6 @@
   --border-color: #e6eefc;
 }
 
-/* Theme toggle button */
-.theme-toggle {
-  background: transparent;
-  border: 1px solid var(--border-color);
-  padding: 6px 8px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-color);
-}
-
-/* Dark / Night theme overrides */
-.dark {
-  --primary-color: #6fb1ff; /* lighter blue accent */
-  --secondary-color: #01203a; /* very deep navy */
-  --accent-color: #66e0ff;
-  --light-bg: #071024; /* page background */
-  --text-dark: #e6f0ff;
-  --text-muted: #9fb5d9;
-  --border-color: rgba(255,255,255,0.06);
-}
-
-/* smooth transition when toggling theme */
-html, body, .service-card, .testimonial-card, .stat, .contact-form input, .contact-form textarea {
-  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
-}
-
 body {
   font-family: Inter, 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
   line-height: 1.6;

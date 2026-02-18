@@ -125,32 +125,3 @@ window.addEventListener('resize', () => {
         navMenu.style.display = 'flex';
     }
 });
-
-// Theme toggle: persist user choice and initialize
-const themeToggle = document.getElementById('themeToggle');
-function applyTheme(theme) {
-    if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-        if (themeToggle) themeToggle.textContent = '☀️';
-    } else {
-        document.documentElement.classList.remove('dark');
-        if (themeToggle) themeToggle.textContent = '🌙';
-    }
-}
-
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-    applyTheme(savedTheme);
-} else {
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    applyTheme(prefersDark ? 'dark' : 'light');
-}
-
-if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.contains('dark');
-        const newTheme = isDark ? 'light' : 'dark';
-        applyTheme(newTheme);
-        localStorage.setItem('theme', newTheme);
-    });
-}
