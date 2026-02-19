@@ -42,6 +42,9 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
+// Initialize EmailJS
+emailjs.init('YOUR_PUBLIC_KEY_HERE');
+
 // Form submission handler
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
@@ -55,9 +58,29 @@ if (contactForm) {
         
         // Simple validation
         if (name && email && message) {
-            // Show success message (in a real application, this would send to a server)
-            alert(`Thank you, ${name}! Your message has been received. We'll get back to you soon at ${email}.`);
-            this.reset();
+            // Disable button to prevent multiple submissions
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            // Send email using EmailJS
+            emailjs.send('SERVICE_ID_HERE', 'TEMPLATE_ID_HERE', {
+                to_email: 'fazrehabcentre@gmail.com',
+                from_email: email,
+                from_name: name,
+                message: message
+            }).then(() => {
+                alert(`Thank you, ${name}! Your message has been sent successfully. We'll get back to you soon at ${email}.`);
+                contactForm.reset();
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }).catch(error => {
+                console.error('Email send failed:', error);
+                alert('Failed to send message. Please try again or contact us directly.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            });
         } else {
             alert('Please fill in all fields.');
         }
