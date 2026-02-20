@@ -111,6 +111,107 @@ body {
 
 .cta-button:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(11,102,255,0.12); }
 
+/* Slideshow Section */
+.slideshow-section {
+  padding: 0;
+  background-color: #fff;
+}
+
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: #f0f0f0;
+  overflow: hidden;
+}
+
+.slide {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 500px;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.slide-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  color: white;
+  padding: 30px 20px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.slide.fade {
+  animation: fade 1s ease-in-out;
+}
+
+@keyframes fade {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  background-color: rgba(0,0,0,0.5);
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.3s ease, background-color 0.3s ease;
+  border-radius: 3px;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+}
+
+.prev {
+  left: 0;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+  transform: scale(1.1);
+}
+
+.dots-container {
+  text-align: center;
+  padding: 15px 0;
+  background-color: #fff;
+}
+
+.dot {
+  cursor: pointer;
+  height: 12px;
+  width: 12px;
+  margin: 0 6px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active, .dot:hover {
+  background-color: var(--primary-color);
+}
+
 /* Services Section */
 .services {
   padding: 72px 0;
@@ -205,6 +306,6 @@ body {
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 /* Responsive */
-@media (max-width: 900px) { .about-content, .contact-content { grid-template-columns: 1fr; } .services-grid, .testimonials-grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .about-content, .contact-content { grid-template-columns: 1fr; } .services-grid, .testimonials-grid { grid-template-columns: 1fr; } .slide { height: 350px; } }
 
-@media (max-width: 480px) { .nav-menu { display: none; } .hamburger { display: flex; } .hero-content h1 { font-size: 1.3rem; } }
+@media (max-width: 480px) { .nav-menu { display: none; } .hamburger { display: flex; } .hero-content h1 { font-size: 1.3rem; } .slide { height: 250px; } .slide-caption { font-size: 1.1rem; padding: 20px 10px; } .prev, .next { padding: 12px; font-size: 16px; } .dot { height: 10px; width: 10px; margin: 0 4px; } }
