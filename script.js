@@ -74,19 +74,33 @@ function scrollToSection(sectionId) {
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
-if (hamburger) {
+if (hamburger && navMenu) {
+    // Initialize menu as hidden on mobile
+    if (window.innerWidth <= 768) {
+        navMenu.classList.add('hidden');
+    }
+    
     hamburger.addEventListener('click', () => {
-        navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        navMenu.classList.toggle('hidden');
     });
 }
 
 // Close mobile menu when a link is clicked
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-        if (navMenu.style.display === 'flex') {
-            navMenu.style.display = 'none';
+        if (navMenu && navMenu.classList.contains('hidden') === false) {
+            navMenu.classList.add('hidden');
         }
     });
+});
+
+// Handle window resize
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        navMenu.classList.remove('hidden');
+    } else {
+        navMenu.classList.add('hidden');
+    }
 });
 
 // Initialize EmailJS
