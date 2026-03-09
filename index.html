@@ -4,67 +4,192 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faz Rehab Centre - Professional Physiotherapy Services</title>
-    <link rel="stylesheet" href="styles.css?v=2">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS – Animate On Scroll -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+    <!-- Custom styles (slideshow + overrides) -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Tailwind custom config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#0b66ff',
+                            dark:    '#063a8c',
+                            light:   '#e8f0ff',
+                        },
+                        accent: '#00c2ff',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-content">
-                <div class="logo">Faz Rehab Centre</div>
-                <ul class="nav-menu">
-                    <li><a href="#home" class="nav-link">Home</a></li>
-                    <li><a href="#services" class="nav-link">Services</a></li>
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
+<body class="font-sans bg-gray-50 text-gray-900 antialiased">
+
+    <!-- ── Navigation ────────────────────────────────────────────── -->
+    <nav class="bg-white sticky top-0 z-50 border-b border-gray-100 shadow-sm"
+         x-data="{ open: false }">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+
+                <!-- Logo -->
+                <a href="#home" class="flex items-center gap-2 font-extrabold text-lg text-primary no-underline">
+                    <i class="fas fa-heart-pulse"></i>
+                    Faz Rehab Centre
+                </a>
+
+                <!-- Desktop nav links -->
+                <ul class="hidden md:flex items-center gap-6 list-none m-0 p-0">
+                    <li><a href="#home"         class="nav-link text-gray-500 hover:text-primary font-semibold text-sm transition-colors no-underline">Home</a></li>
+                    <li><a href="#services"     class="nav-link text-gray-500 hover:text-primary font-semibold text-sm transition-colors no-underline">Services</a></li>
+                    <li><a href="#about"        class="nav-link text-gray-500 hover:text-primary font-semibold text-sm transition-colors no-underline">About</a></li>
+                    <li><a href="#testimonials" class="nav-link text-gray-500 hover:text-primary font-semibold text-sm transition-colors no-underline">Testimonials</a></li>
+                    <li><a href="#contact"      class="nav-link text-gray-500 hover:text-primary font-semibold text-sm transition-colors no-underline">Contact</a></li>
                 </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+
+                <!-- Desktop Book Now button -->
+                <a href="#contact"
+                   class="hidden md:inline-block bg-primary text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-primary-dark transition-colors no-underline">
+                    Book Now
+                </a>
+
+                <!-- Hamburger (mobile) -->
+                <button @click="open = !open"
+                        class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                        aria-label="Toggle menu">
+                    <i class="fas fa-bars   text-gray-700 text-lg" x-show="!open"></i>
+                    <i class="fas fa-times  text-gray-700 text-lg" x-show="open" x-cloak></i>
+                </button>
+            </div>
+
+            <!-- Mobile menu -->
+            <div class="md:hidden"
+                 x-show="open" x-cloak
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0 -translate-y-2"
+                 x-transition:enter-end="opacity-100 translate-y-0">
+                <ul class="flex flex-col gap-3 py-4 px-1 border-t border-gray-100 list-none m-0">
+                    <li><a href="#home"         @click="open=false" class="block text-gray-600 hover:text-primary font-semibold no-underline py-1">Home</a></li>
+                    <li><a href="#services"     @click="open=false" class="block text-gray-600 hover:text-primary font-semibold no-underline py-1">Services</a></li>
+                    <li><a href="#about"        @click="open=false" class="block text-gray-600 hover:text-primary font-semibold no-underline py-1">About</a></li>
+                    <li><a href="#testimonials" @click="open=false" class="block text-gray-600 hover:text-primary font-semibold no-underline py-1">Testimonials</a></li>
+                    <li><a href="#contact"      @click="open=false" class="block text-gray-600 hover:text-primary font-semibold no-underline py-1">Contact</a></li>
+                    <li class="pt-1">
+                        <a href="#contact" @click="open=false"
+                           class="inline-block bg-primary text-white px-5 py-2 rounded-full text-sm font-bold no-underline">
+                            Book Now
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Transform Your Health & Mobility</h1>
-                <p>Professional physiotherapy services tailored to your recovery and wellness goals</p>
-                <button class="cta-button" onclick="scrollToSection('contact')">Book Appointment</button>
+    <!-- ── Hero ──────────────────────────────────────────────────── -->
+    <section id="home"
+             class="relative bg-gradient-to-br from-primary to-primary-dark text-white overflow-hidden">
+        <!-- Decorative blobs -->
+        <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+            <div class="absolute top-16 left-8  w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-8 right-8 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24
+                    flex flex-col items-center justify-center text-center min-h-[60vh]">
+            <div data-aos="fade-up" data-aos-duration="800">
+                <span class="inline-block bg-white/20 backdrop-blur-sm text-white
+                             text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest">
+                    Professional Physiotherapy Services
+                </span>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-5 leading-tight">
+                    Transform Your<br>
+                    <span class="text-accent">Health &amp; Mobility</span>
+                </h1>
+                <p class="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto">
+                    Professional physiotherapy services tailored to your recovery and wellness goals
+                </p>
+                <div class="flex gap-4 justify-center flex-wrap">
+                    <button onclick="scrollToSection('contact')"
+                            class="bg-white text-primary px-8 py-3.5 rounded-full font-bold
+                                   hover:-translate-y-1 transition-all duration-200 shadow-xl hover:shadow-2xl">
+                        <i class="fas fa-calendar-check mr-2"></i>Book Appointment
+                    </button>
+                    <a href="#services"
+                       class="border-2 border-white/60 text-white px-8 py-3.5 rounded-full font-bold
+                              hover:bg-white/20 transition-all duration-200 no-underline">
+                        <i class="fas fa-arrow-right mr-2"></i>Our Services
+                    </a>
+                </div>
+            </div>
+
+            <!-- Stats bar -->
+            <div class="mt-16 grid grid-cols-3 gap-8 w-full max-w-lg"
+                 data-aos="fade-up" data-aos-delay="200">
+                <div class="text-center">
+                    <div class="text-3xl font-extrabold">500+</div>
+                    <div class="text-white/70 text-xs mt-1 uppercase tracking-wide">Patients</div>
+                </div>
+                <div class="text-center border-x border-white/20">
+                    <div class="text-3xl font-extrabold">95%</div>
+                    <div class="text-white/70 text-xs mt-1 uppercase tracking-wide">Success Rate</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-extrabold">15+</div>
+                    <div class="text-white/70 text-xs mt-1 uppercase tracking-wide">Years Exp.</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Slideshow Section -->
+    <!-- ── Slideshow ─────────────────────────────────────────────── -->
     <section class="slideshow-section">
         <div class="slideshow-container">
             <div class="slide fade">
-                <img src="https://images.unsplash.com/photo-1576091160550-112173f7f869?w=1200&h=500&fit=crop" alt="Physiotherapy Session 1">
+                <img src="https://images.unsplash.com/photo-1576091160550-112173f7f869?w=1200&h=500&fit=crop"
+                     alt="Physiotherapy Session 1">
                 <div class="slide-caption">Professional Recovery Programs</div>
             </div>
             <div class="slide fade">
-                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&h=500&fit=crop" alt="Physiotherapy Session 2">
+                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&h=500&fit=crop"
+                     alt="Physiotherapy Session 2">
                 <div class="slide-caption">Expert Physical Therapy</div>
             </div>
             <div class="slide fade">
-                <img src="https://images.unsplash.com/photo-1579154204601-01d82979d485?w=1200&h=500&fit=crop" alt="Physiotherapy Session 3">
+                <img src="https://images.unsplash.com/photo-1579154204601-01d82979d485?w=1200&h=500&fit=crop"
+                     alt="Physiotherapy Session 3">
                 <div class="slide-caption">Comprehensive Rehabilitation</div>
             </div>
             <div class="slide fade">
-                <img src="https://images.unsplash.com/photo-1502881917128-1aa500764cbd?w=1200&h=500&fit=crop" alt="Wellness Center">
+                <img src="https://images.unsplash.com/photo-1502881917128-1aa500764cbd?w=1200&h=500&fit=crop"
+                     alt="Wellness Center">
                 <div class="slide-caption">State-of-the-art Facilities</div>
             </div>
 
-            <!-- Navigation buttons -->
             <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
             <a class="next" onclick="changeSlide(1)">&#10095;</a>
         </div>
-
-        <!-- Dots for slide indicators -->
         <div class="dots-container">
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
@@ -73,138 +198,429 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2>Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🏥</div>
-                    <h3>Injury Recovery</h3>
-                    <p>Comprehensive rehabilitation programs for sports injuries, fractures, and post-surgical recovery.</p>
+    <!-- ── Services ──────────────────────────────────────────────── -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14" data-aos="fade-up">
+                <span class="text-primary text-sm font-bold uppercase tracking-widest">What We Offer</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-3">Our Services</h2>
+                <p class="text-gray-500 max-w-xl mx-auto">
+                    Comprehensive physiotherapy solutions designed to help you recover faster and live better
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Injury Recovery -->
+                <div class="bg-gray-50 p-7 rounded-2xl border border-gray-100 group
+                            hover:-translate-y-2 hover:shadow-xl hover:border-primary/20 transition-all duration-300"
+                     data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-5
+                                group-hover:bg-primary/20 transition-colors">
+                        <i class="fas fa-bandage text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-lg mb-2">Injury Recovery</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Comprehensive rehabilitation programs for sports injuries, fractures, and post-surgical recovery.
+                    </p>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">💪</div>
-                    <h3>Sports Physio</h3>
-                    <p>Performance enhancement and injury prevention for athletes of all levels.</p>
+
+                <!-- Sports Physio -->
+                <div class="bg-gray-50 p-7 rounded-2xl border border-gray-100 group
+                            hover:-translate-y-2 hover:shadow-xl hover:border-primary/20 transition-all duration-300"
+                     data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-5
+                                group-hover:bg-primary/20 transition-colors">
+                        <i class="fas fa-dumbbell text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-lg mb-2">Sports Physio</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Performance enhancement and injury prevention for athletes of all levels.
+                    </p>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">🧘</div>
-                    <h3>Chronic Pain Management</h3>
-                    <p>Evidence-based treatments for back pain, neck pain, and other chronic conditions.</p>
+
+                <!-- Chronic Pain Management -->
+                <div class="bg-gray-50 p-7 rounded-2xl border border-gray-100 group
+                            hover:-translate-y-2 hover:shadow-xl hover:border-primary/20 transition-all duration-300"
+                     data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-5
+                                group-hover:bg-primary/20 transition-colors">
+                        <i class="fas fa-spa text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-lg mb-2">Chronic Pain Management</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Evidence-based treatments for back pain, neck pain, and other chronic conditions.
+                    </p>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">🦴</div>
-                    <h3>Orthopedic Rehab</h3>
-                    <p>Specialized care for joint disorders, arthritis, and musculoskeletal conditions.</p>
+
+                <!-- Orthopedic Rehab -->
+                <div class="bg-gray-50 p-7 rounded-2xl border border-gray-100 group
+                            hover:-translate-y-2 hover:shadow-xl hover:border-primary/20 transition-all duration-300"
+                     data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-5
+                                group-hover:bg-primary/20 transition-colors">
+                        <i class="fas fa-bone text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-lg mb-2">Orthopedic Rehab</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Specialized care for joint disorders, arthritis, and musculoskeletal conditions.
+                    </p>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">🏃</div>
-                    <h3>Manual Therapy</h3>
-                    <p>Expert hands-on techniques including massage, mobilization, and manipulation.</p>
+
+                <!-- Manual Therapy -->
+                <div class="bg-gray-50 p-7 rounded-2xl border border-gray-100 group
+                            hover:-translate-y-2 hover:shadow-xl hover:border-primary/20 transition-all duration-300"
+                     data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-5
+                                group-hover:bg-primary/20 transition-colors">
+                        <i class="fas fa-hands text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-lg mb-2">Manual Therapy</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Expert hands-on techniques including massage, mobilization, and manipulation.
+                    </p>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">🎯</div>
-                    <h3>Prevention Programs</h3>
-                    <p>Proactive fitness and wellness programs to prevent injuries before they occur.</p>
+
+                <!-- Prevention Programs -->
+                <div class="bg-gray-50 p-7 rounded-2xl border border-gray-100 group
+                            hover:-translate-y-2 hover:shadow-xl hover:border-primary/20 transition-all duration-300"
+                     data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-5
+                                group-hover:bg-primary/20 transition-colors">
+                        <i class="fas fa-shield-heart text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-lg mb-2">Prevention Programs</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Proactive fitness and wellness programs to prevent injuries before they occur.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>About Our Practice</h2>
-                    <p>With over 15 years of experience in clinical physiotherapy, our team is dedicated to helping you achieve optimal health and mobility. We combine evidence-based practices with personalized care to ensure the best outcomes for every patient.</p>
-                    <h3>Why Choose Us?</h3>
-                    <ul class="about-list">
-                        <li>✓ Licensed and Certified Physiotherapists</li>
-                        <li>✓ State-of-the-art equipment and facilities</li>
-                        <li>✓ Personalized treatment plans</li>
-                        <li>✓ Flexible scheduling</li>
-                        <li>✓ Insurance accepted</li>
+    <!-- ── About ─────────────────────────────────────────────────── -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+
+                <!-- Text column -->
+                <div data-aos="fade-right">
+                    <span class="text-primary text-sm font-bold uppercase tracking-widest">About Us</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-5">About Our Practice</h2>
+                    <p class="text-gray-500 leading-relaxed mb-7">
+                        With over 15 years of experience in clinical physiotherapy, our team is dedicated to helping
+                        you achieve optimal health and mobility. We combine evidence-based practices with personalized
+                        care to ensure the best outcomes for every patient.
+                    </p>
+
+                    <h3 class="font-bold text-gray-900 text-lg mb-4">Why Choose Us?</h3>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-primary text-xs"></i>
+                            </span>
+                            Licensed and Certified Physiotherapists
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-primary text-xs"></i>
+                            </span>
+                            State-of-the-art equipment and facilities
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-primary text-xs"></i>
+                            </span>
+                            Personalized treatment plans
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-primary text-xs"></i>
+                            </span>
+                            Flexible scheduling
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-600">
+                            <span class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-primary text-xs"></i>
+                            </span>
+                            Insurance accepted
+                        </li>
                     </ul>
+
+                    <button onclick="scrollToSection('contact')"
+                            class="bg-primary text-white px-7 py-3 rounded-full font-bold
+                                   hover:-translate-y-1 transition-all duration-200 shadow-lg hover:shadow-primary/30">
+                        Get Started Today
+                    </button>
                 </div>
-                <div class="about-stats">
-                    <div class="stat">
-                        <h3>500+</h3>
-                        <p>Patients Treated</p>
+
+                <!-- Stats column -->
+                <div class="grid grid-cols-1 gap-5" data-aos="fade-left">
+                    <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-5">
+                        <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-users text-primary text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-extrabold text-gray-900">500+</div>
+                            <div class="text-gray-500 text-sm">Patients Successfully Treated</div>
+                        </div>
                     </div>
-                    <div class="stat">
-                        <h3>95%</h3>
-                        <p>Success Rate</p>
+                    <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-5">
+                        <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-trophy text-primary text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-extrabold text-gray-900">95%</div>
+                            <div class="text-gray-500 text-sm">Patient Success Rate</div>
+                        </div>
                     </div>
-                    <div class="stat">
-                        <h3>15+</h3>
-                        <p>Years Experience</p>
+                    <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-5">
+                        <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-star text-primary text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-extrabold text-gray-900">15+</div>
+                            <div class="text-gray-500 text-sm">Years of Clinical Experience</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <h2>Patient Testimonials</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"The physiotherapists here are absolutely fantastic. After my knee surgery, I wasn't sure I'd regain full mobility, but their treatment plan worked wonders. I'm back to playing tennis!"</p>
-                    <p class="testimonial-author">- Sarah Johnson</p>
+    <!-- ── Testimonials ───────────────────────────────────────────── -->
+    <section id="testimonials" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14" data-aos="fade-up">
+                <span class="text-primary text-sm font-bold uppercase tracking-widest">Testimonials</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-3">Patient Testimonials</h2>
+                <p class="text-gray-500">Hear what our patients say about their experience</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Sarah Johnson -->
+                <div class="bg-gray-50 p-7 rounded-2xl border border-gray-100"
+                     data-aos="fade-up" data-aos-delay="0">
+                    <div class="flex gap-1 mb-4 text-yellow-400">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-5">
+                        "The physiotherapists here are absolutely fantastic. After my knee surgery, I wasn't sure
+                        I'd regain full mobility, but their treatment plan worked wonders. I'm back to playing tennis!"
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-primary text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-gray-900 text-sm">Sarah Johnson</div>
+                            <div class="text-gray-400 text-xs">Knee Surgery Recovery</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Professional, caring, and results-oriented. My chronic back pain has significantly improved after just 6 weeks of treatment. Highly recommended!"</p>
-                    <p class="testimonial-author">- Michael Chen</p>
+
+                <!-- Michael Chen -->
+                <div class="bg-gray-50 p-7 rounded-2xl border border-gray-100"
+                     data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex gap-1 mb-4 text-yellow-400">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-5">
+                        "Professional, caring, and results-oriented. My chronic back pain has significantly improved
+                        after just 6 weeks of treatment. Highly recommended!"
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-primary text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-gray-900 text-sm">Michael Chen</div>
+                            <div class="text-gray-400 text-xs">Chronic Back Pain</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"The staff made me feel welcome from day one. They took time to understand my needs and created a treatment plan that actually worked. Couldn't ask for better care."</p>
-                    <p class="testimonial-author">- Emma Davis</p>
+
+                <!-- Emma Davis -->
+                <div class="bg-gray-50 p-7 rounded-2xl border border-gray-100"
+                     data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex gap-1 mb-4 text-yellow-400">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-5">
+                        "The staff made me feel welcome from day one. They took time to understand my needs and
+                        created a treatment plan that actually worked. Couldn't ask for better care."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-primary text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-gray-900 text-sm">Emma Davis</div>
+                            <div class="text-gray-400 text-xs">General Physiotherapy</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Contact Details</h3>
-                    <p><strong>Address:</strong> Suite 022, Kompleks Eureka, USM, Batu Uban, Malaysia, 11700</p>
-                    <p><strong>Phone:</strong> +60 11-5430 7176</p>
-                    <p><strong>Email:</strong> fazrehabcentre@gmail.com</p>
-                    <p><strong>Hours:</strong></p>
-                    <ul>
-                        <li>Monday - Friday: 7:00 AM - 7:00 PM</li>
-                        <li>Saturday: 9:00 AM - 4:00 PM</li>
-                        <li>Sunday: Closed</li>
-                    </ul>
+    <!-- ── Contact ────────────────────────────────────────────────── -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14" data-aos="fade-up">
+                <span class="text-primary text-sm font-bold uppercase tracking-widest">Contact</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-3">Get In Touch</h2>
+                <p class="text-gray-500">Book an appointment or ask us anything</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+                <!-- Contact details -->
+                <div data-aos="fade-right">
+                    <h3 class="font-bold text-gray-900 text-xl mb-6">Contact Details</h3>
+                    <div class="space-y-5">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-location-dot text-primary text-lg"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900 mb-0.5">Address</div>
+                                <div class="text-gray-500 text-sm">Suite 022, Kompleks Eureka, USM, Batu Uban, Malaysia, 11700</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-primary text-lg"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900 mb-0.5">Phone</div>
+                                <a href="tel:+601154307176" class="text-primary text-sm font-medium no-underline hover:underline">+60 11-5430 7176</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-primary text-lg"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900 mb-0.5">Email</div>
+                                <a href="mailto:fazrehabcentre@gmail.com" class="text-primary text-sm font-medium no-underline hover:underline">fazrehabcentre@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-clock text-primary text-lg"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900 mb-0.5">Operating Hours</div>
+                                <div class="text-gray-500 text-sm space-y-0.5">
+                                    <div>Monday – Friday: 7:00 AM – 7:00 PM</div>
+                                    <div>Saturday: 9:00 AM – 4:00 PM</div>
+                                    <div>Sunday: <span class="text-red-500 font-medium">Closed</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <form class="contact-form" id="contactForm">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <textarea placeholder="Your Message" rows="5" required></textarea>
-                    <button type="submit" class="submit-button">Send Message</button>
-                </form>
+
+                <!-- Contact form (Alpine.js owns state + submission) -->
+                <div data-aos="fade-left">
+                    <form class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm"
+                          id="contactForm"
+                          x-data="{ sending: false, sent: false }"
+                          @submit.prevent="
+                            sending = true;
+                            emailjs.send('SERVICE_ID_HERE', 'TEMPLATE_ID_HERE', {
+                              to_email:   'fazrehabcentre@gmail.com',
+                              from_name:  $el.querySelector('input[type=text]').value,
+                              from_email: $el.querySelector('input[type=email]').value,
+                              message:    $el.querySelector('textarea').value,
+                            }).then(() => {
+                              sending = false; sent = true;
+                              $el.reset();
+                              setTimeout(() => sent = false, 5000);
+                            }).catch(() => {
+                              sending = false;
+                              alert('Failed to send message. Please try again or contact us directly.');
+                            });
+                          ">
+
+                        <h3 class="font-bold text-gray-900 text-xl mb-6">Send Us a Message</h3>
+
+                        <!-- Success notice -->
+                        <div x-show="sent" x-cloak
+                             class="bg-green-50 border border-green-200 text-green-700 px-4 py-3
+                                    rounded-xl mb-4 flex items-center gap-2">
+                            <i class="fas fa-circle-check text-green-500"></i>
+                            <span class="text-sm font-medium">Message sent! We'll get back to you soon.</span>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1.5">Your Name</label>
+                                <input type="text" placeholder="John Doe" required
+                                       class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm
+                                              focus:outline-none focus:border-primary focus:ring-2
+                                              focus:ring-primary/20 transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
+                                <input type="email" placeholder="john@example.com" required
+                                       class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm
+                                              focus:outline-none focus:border-primary focus:ring-2
+                                              focus:ring-primary/20 transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1.5">Message</label>
+                                <textarea placeholder="How can we help you?" rows="4" required
+                                          class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm
+                                                 focus:outline-none focus:border-primary focus:ring-2
+                                                 focus:ring-primary/20 transition-all resize-none"></textarea>
+                            </div>
+                            <button type="submit"
+                                    :disabled="sending"
+                                    class="w-full bg-primary text-white py-3.5 rounded-xl font-bold
+                                           hover:-translate-y-0.5 transition-all duration-200
+                                           shadow-lg hover:shadow-primary/30
+                                           disabled:opacity-70 disabled:cursor-not-allowed">
+                                <span x-show="!sending"><i class="fas fa-paper-plane mr-2"></i>Send Message</span>
+                                <span x-show="sending" x-cloak><i class="fas fa-spinner fa-spin mr-2"></i>Sending…</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Faz Rehab Centre. All rights reserved. | Professional Physiotherapy Services</p>
+    <!-- ── Footer ─────────────────────────────────────────────────── -->
+    <footer class="bg-gray-900 text-gray-400 py-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2 text-white font-bold text-lg">
+                    <i class="fas fa-heart-pulse text-primary"></i>
+                    Faz Rehab Centre
+                </div>
+                <p class="text-sm text-center">
+                    &copy; 2026 Faz Rehab Centre. All rights reserved. | Professional Physiotherapy Services
+                </p>
+                <div class="flex gap-5">
+                    <a href="tel:+601154307176"
+                       class="text-gray-400 hover:text-primary transition-colors" title="Call us">
+                        <i class="fas fa-phone text-lg"></i>
+                    </a>
+                    <a href="mailto:fazrehabcentre@gmail.com"
+                       class="text-gray-400 hover:text-primary transition-colors" title="Email us">
+                        <i class="fas fa-envelope text-lg"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
